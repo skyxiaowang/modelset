@@ -31,3 +31,15 @@ code_*.html
 *.pem
 *.key
 secrets/
+
+# Project unrelated
+ui/
+ill/
+.agents/
+.claude/skills/
+.claude/settings.local.json
+js/
+logo.jpg
+illustrations.html
+technical-article.md
+skills-lock.json
