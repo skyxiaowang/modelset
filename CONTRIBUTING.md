@@ -53,4 +53,4 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 
 ## Questions?
 
-Reach out via our [Help Center](https://ai.modelset.top/about) if you have questions about contributing.
+Reach out via our [Help Center](https://modelset.top/about) if you have questions about contributing.

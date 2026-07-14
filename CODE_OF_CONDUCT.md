@@ -46,7 +46,7 @@ an individual is officially representing the community in public spaces.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement via our
-[Help Center](https://ai.modelset.top/about).
+[Help Center](https://modelset.top/about).
 
 All complaints will be reviewed and investigated promptly and fairly.
 

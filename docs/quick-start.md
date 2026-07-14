@@ -4,7 +4,7 @@ Get up and running with ModelSet — the unified AI model API gateway — in und
 
 ## 1. Register & Get Your API Key
 
-1. Visit [ai.modelset.top/login](https://ai.modelset.top/login)
+1. Visit [modelset.top/login](https://modelset.top/login)
 2. Complete registration (free, no credit card required)
 3. Copy your API Key from the dashboard
 
@@ -14,13 +14,13 @@ Get up and running with ModelSet — the unified AI model API gateway — in und
 
 ```bash
 # For Anthropic-compatible clients (Claude Code, etc.)
-export ANTHROPIC_BASE_URL="https://ai.modelset.top"
+export ANTHROPIC_BASE_URL="https://modelset.top"
 export ANTHROPIC_AUTH_TOKEN="sk-xxxx"
 ```
 
 ```bash
 # For OpenAI-compatible clients (Cursor, Codex, etc.)
-export OPENAI_BASE_URL="https://ai.modelset.top"
+export OPENAI_BASE_URL="https://modelset.top"
 export OPENAI_API_KEY="sk-xxxx"
 ```
 
@@ -61,7 +61,7 @@ You should receive a valid JSON response from the Claude model.
 ### Claude Code API Setup
 
 ```bash
-export ANTHROPIC_BASE_URL="https://ai.modelset.top"
+export ANTHROPIC_BASE_URL="https://modelset.top"
 export ANTHROPIC_AUTH_TOKEN="sk-xxxx"
 claude
 ```
@@ -107,5 +107,5 @@ Same as Cursor — configure OpenAI compatible provider with the base URL above.
 ## Need Help?
 
 - Check the [FAQ](faq.md) for common issues
-- Visit our [Help Center](https://ai.modelset.top/about)
-- Join our [Community Group](https://ai.modelset.top/about)
+- Visit our [Help Center](https://modelset.top/about)
+- Join our [Community Group](https://modelset.top/about)

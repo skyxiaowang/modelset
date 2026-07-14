@@ -7,7 +7,7 @@ We take the security of ModelSet and our users seriously.
 If you discover a security vulnerability, please report it responsibly:
 
 1. **Do NOT** open a public GitHub issue
-2. Contact us via our [Help Center](https://ai.modelset.top/about)
+2. Contact us via our [Help Center](https://modelset.top/about)
 3. Include detailed steps to reproduce the vulnerability
 4. Include the potential impact
 

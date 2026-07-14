@@ -9,7 +9,7 @@ Every client needs these two settings:
 | Setting | Value |
 |---------|-------|
 | **Base URL** | `https://ai.modelset.top` |
-| **API Key** | Your ModelSet API Key (from [dashboard](https://ai.modelset.top/login)) |
+| **API Key** | Your ModelSet API Key (from [dashboard](https://modelset.top/login)) |
 
 ---
 
@@ -20,7 +20,7 @@ Every client needs these two settings:
 ### Method 1: Environment Variables (Quick Setup)
 
 ```bash
-export ANTHROPIC_BASE_URL="https://ai.modelset.top"
+export ANTHROPIC_BASE_URL="https://modelset.top"
 export ANTHROPIC_AUTH_TOKEN="sk-xxxx"
 ```
 
@@ -31,7 +31,7 @@ Then run `claude` as usual.
 Add to your shell profile (`~/.bashrc`, `~/.zshrc`, or PowerShell profile):
 
 ```bash
-export ANTHROPIC_BASE_URL="https://ai.modelset.top"
+export ANTHROPIC_BASE_URL="https://modelset.top"
 export ANTHROPIC_AUTH_TOKEN="sk-xxxx"
 ```
 
@@ -78,7 +78,7 @@ OpenAI's Codex / ChatGPT desktop client.
 ### Environment Variables
 
 ```bash
-export OPENAI_BASE_URL="https://ai.modelset.top"
+export OPENAI_BASE_URL="https://modelset.top"
 export OPENAI_API_KEY="sk-xxxx"
 ```
 
@@ -115,7 +115,7 @@ Add to your Continue `config.json`:
       "title": "ModelSet - Claude Sonnet 5",
       "provider": "openai",
       "model": "claude-sonnet-5",
-      "apiBase": "https://ai.modelset.top",
+      "apiBase": "https://modelset.top",
       "apiKey": "sk-xxxx"
     }
   ]
@@ -176,6 +176,6 @@ ModelSet works with **any client** that supports OpenAI or Anthropic API formats
 | **Connection timeout** | Check network access to `ai.modelset.top`; configure proxy if needed |
 | **Model not found** | Verify the model name matches our [supported list](../README.md#supported-models) |
 | **Rate limited (429)** | Wait 60 seconds and retry; implement exponential backoff |
-| **Insufficient balance (402)** | [Recharge your account](https://ai.modelset.top/login) or use referral tokens |
+| **Insufficient balance (402)** | [Recharge your account](https://modelset.top/login) or use referral tokens |
 
-Need more help? [Contact us](https://ai.modelset.top/about).
+Need more help? [Contact us](https://modelset.top/about).

@@ -18,7 +18,7 @@ All API requests require authentication via Bearer token in the `Authorization` 
 Authorization: Bearer sk-xxxx
 ```
 
-Get your API Key from [ai.modelset.top/login](https://ai.modelset.top/login).
+Get your API Key from [ai.modelset.top/login](https://modelset.top/login).
 
 ---
 
@@ -117,7 +117,7 @@ from openai import OpenAI
 
 client = OpenAI(
     api_key="sk-xxxx",
-    base_url="https://ai.modelset.top",
+    base_url="https://modelset.top",
 )
 
 response = client.chat.completions.create(
@@ -134,7 +134,7 @@ import OpenAI from "openai";
 
 const client = new OpenAI({
   apiKey: "sk-xxxx",
-  baseURL: "https://ai.modelset.top",
+  baseURL: "https://modelset.top",
 });
 
 const response = await client.chat.completions.create({
@@ -229,7 +229,7 @@ curl https://ai.modelset.top/v1/messages \
 |-------------|-------------|--------|
 | `400` | Bad Request | Check request format and required fields |
 | `401` | Unauthorized | Verify your API Key is correct, check for typos |
-| `402` | Insufficient Balance | [Recharge your account](https://ai.modelset.top/login) |
+| `402` | Insufficient Balance | [Recharge your account](https://modelset.top/login) |
 | `429` | Rate Limited | Wait and retry with exponential backoff |
 | `500` | Internal Server Error | Temporary issue, retry after a few seconds |
 | `503` | Service Unavailable | Maintenance window, check [status page](https://ai.modelset.top) |
@@ -253,7 +253,7 @@ curl https://ai.modelset.top/v1/messages \
 | Default | 60 RPM | Standard rate for all users |
 | Claude Code group | 60 RPM | Model-specific limits may apply |
 
-For custom rate limits or enterprise needs, contact us via the [Help Center](https://ai.modelset.top/about).
+For custom rate limits or enterprise needs, contact us via the [Help Center](https://modelset.top/about).
 
 ## Best Practices for AI API Integration
 
@@ -269,4 +269,4 @@ For custom rate limits or enterprise needs, contact us via the [Help Center](htt
 - [Quick Start Guide](quick-start.md) — Get started in 2 minutes
 - [Client Setup](clients.md) — Configure your favorite AI coding tool
 - [FAQ](faq.md) — Common questions answered
-- [Help Center](https://ai.modelset.top/about) — Contact support
+- [Help Center](https://modelset.top/about) — Contact support

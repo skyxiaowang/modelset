@@ -6,11 +6,11 @@
 
 **One API Key. All Models. Lowest Price.**
 
-[![99.9% Uptime](https://img.shields.io/badge/uptime-99.9%25-3ea87a?style=for-the-badge&logo=statuspal)](https://ai.modelset.top)
-[![50+ Models](https://img.shields.io/badge/models-50%2B-c4755a?style=for-the-badge)](https://ai.modelset.top)
-[![100K+ Developers](https://img.shields.io/badge/developers-100K%2B-2a2a2a?style=for-the-badge)](https://ai.modelset.top)
+[![99.9% Uptime](https://img.shields.io/badge/uptime-99.9%25-3ea87a?style=for-the-badge&logo=statuspal)](https://modelset.top)
+[![50+ Models](https://img.shields.io/badge/models-50%2B-c4755a?style=for-the-badge)](https://modelset.top)
+[![100K+ Developers](https://img.shields.io/badge/developers-100K%2B-2a2a2a?style=for-the-badge)](https://modelset.top)
 
-[🚀 Get Started](https://ai.modelset.top/login) · [📖 Documentation](docs/quick-start.md) · [💬 Community](https://ai.modelset.top/about) · [📄 FAQ](docs/faq.md)
+[🚀 Get Started](https://modelset.top/login) · [📖 Documentation](docs/quick-start.md) · [💬 Community](https://modelset.top/about) · [📄 FAQ](docs/faq.md)
 
 </div>
 
@@ -61,7 +61,7 @@ Instead of managing separate accounts, billing, and integrations across multiple
 
 ### Step 1: Get your API Key
 
-Visit [ai.modelset.top/login](https://ai.modelset.top/login) to register and get your API Key. Free to register, no credit card required.
+Visit [modelset.top/login](https://modelset.top/login) to register and get your API Key. Free to register, no credit card required.
 
 ### Step 2: Configure environment variables
 
@@ -118,7 +118,7 @@ We have **one and only one campaign**: Invite new users to register and get rewa
 
 Join our official service group. We periodically release redemption codes that can be directly exchanged for tokens.
 
-👉 [Join Official Group →](https://ai.modelset.top/about)
+👉 [Join Official Group →](https://modelset.top/about)
 
 ## No Subscriptions. No Surprises.
 
@@ -185,7 +185,7 @@ Join our official service group. We periodically release redemption codes that c
 
 Midjourney · Cohere · Groq · Perplexity · Stability AI
 
-> For the complete model list, real-time status, and pricing, visit [ai.modelset.top](https://ai.modelset.top).
+> For the complete model list, real-time status, and pricing, visit [modelset.top](https://modelset.top).
 
 ## Pricing
 
@@ -256,9 +256,9 @@ ModelSet works with **any client or SDK** that supports **OpenAI** or **Anthropi
 
 ## Community
 
-- 💬 [Official Service Group](https://ai.modelset.top/about) — Get help, share feedback, redeem codes
+- 💬 [Official Service Group](https://modelset.top/about) — Get help, share feedback, redeem codes
 - 🐛 [GitHub Issues](https://github.com/skyxiaowang/modelset/issues) — Report bugs, suggest features
-- 📝 [Help Center](https://ai.modelset.top/about) — Tutorials and guides
+- 📝 [Help Center](https://modelset.top/about) — Tutorials and guides
 -  **WeChat** — Scan QR code below to join our official group
 
 <div align="center">
@@ -279,7 +279,7 @@ MIT — see [LICENSE](LICENSE) for details.
 
 <div align="center">
 
-**Ready to start?** [Get your free API Key →](https://ai.modelset.top/login)
+**Ready to start?** [Get your free API Key →](https://modelset.top/login)
 
 © 2026 ModelSet. All rights reserved.
 
@@ -298,11 +298,11 @@ MIT — see [LICENSE](LICENSE) for details.
 
 **一个 API Key，畅享全球顶尖 AI 模型。最低价、最稳定。**
 
-[![99.9% 可用性](https://img.shields.io/badge/可用性-99.9%25-3ea87a?style=for-the-badge)](https://ai.modelset.top)
-[![50+ 模型](https://img.shields.io/badge/模型-50%2B-c4755a?style=for-the-badge)](https://ai.modelset.top)
-[![100K+ 开发者](https://img.shields.io/badge/开发者-100K%2B-2a2a2a?style=for-the-badge)](https://ai.modelset.top)
+[![99.9% 可用性](https://img.shields.io/badge/可用性-99.9%25-3ea87a?style=for-the-badge)](https://modelset.top)
+[![50+ 模型](https://img.shields.io/badge/模型-50%2B-c4755a?style=for-the-badge)](https://modelset.top)
+[![100K+ 开发者](https://img.shields.io/badge/开发者-100K%2B-2a2a2a?style=for-the-badge)](https://modelset.top)
 
-[🚀 免费获取 API Key](https://ai.modelset.top/login) · [📖 文档](docs/quick-start.md) · [ 社区](https://ai.modelset.top/about) · [📄 FAQ](docs/faq.md)
+[🚀 免费获取 API Key](https://modelset.top/login) · [📖 文档](docs/quick-start.md) · [ 社区](https://modelset.top/about) · [📄 FAQ](docs/faq.md)
 
 </div>
 
@@ -334,7 +334,7 @@ ModelSet 是一个 **AI 模型 API 网关/中转服务**，聚合全球最强 AI
 
 #### 第一步：获取 API Key
 
-访问 [ai.modelset.top/login](https://ai.modelset.top/login) 注册并获取 API Key。免费注册，无需信用卡。
+访问 [modelset.top/login](https://modelset.top/login) 注册并获取 API Key。免费注册，无需信用卡。
 
 #### 第二步：配置环境变量
 
@@ -390,7 +390,7 @@ claude
 
 加入官方服务群，我们会**不定时放出兑换码**，可直接兑换额度使用。关注群消息，不错过每一次福利。
 
-👉 [加入官方服务群 →](https://ai.modelset.top/about)
+👉 [加入官方服务群 →](https://modelset.top/about)
 
 ### 没有套路
 
@@ -498,9 +498,9 @@ claude
 
 ### 社区
 
--  [官方服务群](https://ai.modelset.top/about) — 获取帮助、分享反馈、兑换码
+-  [官方服务群](https://modelset.top/about) — 获取帮助、分享反馈、兑换码
 - 🐛 [GitHub Issues](https://github.com/skyxiaowang/modelset/issues) — 报告 Bug、建议功能
--  [帮助中心](https://ai.modelset.top/about) — 教程和指南
+-  [帮助中心](https://modelset.top/about) — 教程和指南
 - 🟢 **微信** — 扫描上方二维码加入官方服务群
 
 ---
@@ -509,7 +509,7 @@ claude
 
 <div align="center">
 
-**准备好了吗？** [免费获取 API Key →](https://ai.modelset.top/login)
+**准备好了吗？** [免费获取 API Key →](https://modelset.top/login)
 
 © 2026 ModelSet. All rights reserved.
 

@@ -47,8 +47,8 @@ ai-hub/
 
 **品牌名称**：ModelSet  
 **网站主题**：全球顶尖 AI 模型中转站，聚合全球最强模型（Anthropic、OpenAI、Google 等），以最低价、最稳定的方式为开发者提供 API 服务。  
-**实际网址**：https://ai.modelset.top（前端页面）  
-**登录入口**：https://ai.modelset.top/login
+**实际网址**：https://modelset.top（前端页面）  
+**登录入口**：https://modelset.top/login
 
 ### 页面结构与功能区块
 
