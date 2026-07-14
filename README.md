@@ -2,6 +2,18 @@
 
 <div align="center">
 
+[🇺🇸 **English**](#english-version) · [🇨🇳 **中文**](#%E4%B8%AD%E6%96%87%E7%89%88)
+
+</div>
+
+</details>
+
+---
+
+<div id="english-version"></div>
+
+<div align="center">
+
 <img src="assets/logo.jpg" alt="ModelSet Logo" width="120" />
 
 **One API Key. All Models. Lowest Price.**
@@ -288,9 +300,11 @@ MIT — see [LICENSE](LICENSE) for details.
 ---
 
 <details>
-<summary><strong>🇨🇳 中文版</strong></summary>
+<summary><strong>🇨🇳 中文版（点击展开）</strong></summary>
 
 ---
+
+<div id="%E4%B8%AD%E6%96%87%E7%89%88"></div>
 
 <div align="center">
 

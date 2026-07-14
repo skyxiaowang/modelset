@@ -791,15 +791,19 @@
         ModelSet
       </a>
       <nav class="nav-links" id="navLinks" aria-label="主导航">
-        <a href="#features" class="nav-link">优势</a>
-        <a href="#models" class="nav-link">模型</a>
-        <a href="#pricing" class="nav-link">计费</a>
-        <a href="#referral" class="nav-link">邀请</a>
-        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#features" class="nav-link" data-en="Features" data-zh="优势">Features</a>
+        <a href="#models" class="nav-link" data-en="Models" data-zh="模型">Models</a>
+        <a href="#pricing" class="nav-link" data-en="Pricing" data-zh="计费">Pricing</a>
+        <a href="#referral" class="nav-link" data-en="Referral" data-zh="邀请">Referral</a>
+        <a href="#faq" class="nav-link" data-en="FAQ" data-zh="FAQ">FAQ</a>
       </nav>
       <div class="nav-right">
-        <a href="https://modelset.top/login" class="btn btn-primary nav-cta">获取 Key</a>
-        <button class="nav-menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false" aria-controls="navLinks">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="zh">中文</button>
+        </div>
+        <a href="https://modelset.top/login" class="btn btn-primary nav-cta">Get API Key</a>
+        <button class="nav-menu-btn" id="navMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
       </div>
