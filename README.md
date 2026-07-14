@@ -117,9 +117,12 @@ That's it. For detailed setup instructions, see [docs/quick-start.md](docs/quick
 
 We have **one and only one campaign**: Invite new users to register and get rewarded.
 
+- **New users get 5,000,000 tokens** on registration
+- **Every invite = another 5,000,000 tokens** for you
+
 | You get | Friend gets |
 |:-------:|:-----------:|
-| **5,000,000** tokens | **500,000** tokens |
+| **5,000,000** tokens | **5,000,000** tokens |
 
 - Both receive tokens instantly
 - **Unlimited** referrals
@@ -210,7 +213,7 @@ Midjourney · Cohere · Groq · Perplexity · Stability AI
 
 | You get | Friend gets |
 |:-------:|:-----------:|
-| **5,000,000** tokens | **500,000** tokens |
+| **5,000,000** tokens | **5,000,000** tokens |
 
 Both receive tokens instantly. Unlimited referrals. Permanent validity.
 
@@ -390,11 +393,11 @@ claude
 
 </div>
 
-我们**只有一个活动**：邀请新用户注册奖励 **500 万额度**，同时新用户使用邀请码注册也会得到 **50 万额度**。我们鼓励邀请制，这样你就可以**永久地免费使用所有模型**。
+我们**只有一个活动**：新用户注册即送 **500 万额度**，每邀请一个新用户再送 **500 万额度**。我们鼓励邀请制，这样你就可以**永久地免费使用所有模型**。
 
 | 邀请人 | 新用户 |
 |:------:|:------:|
-| **5,000,000** tokens | **500,000** tokens |
+| **5,000,000** tokens | **5,000,000** tokens |
 
 - 双方同时到账，邀请数量**无上限**
 - 多邀多得，**永久有效**
@@ -487,7 +490,7 @@ claude
 
 | 你获得 | 朋友获得 |
 |:------:|:--------:|
-| **5,000,000** tokens | **500,000** tokens |
+| **5,000,000** tokens | **5,000,000** tokens |
 
 双方同时到账。邀请无上限。永久有效。
 
