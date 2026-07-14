@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>ModelSet — 全球顶尖 AI 模型中转站</title>
+  <meta name="description" content="ModelSet聚合全球顶尖AI模型，以最低价、最稳定的方式让开发者使用Claude、GPT-4、Gemini等模型。">
+  <meta property="og:title" content="ModelSet — 全球顶尖 AI 模型中转站">
+  <meta property="og:description" content="一个 API Key，畅享全球顶尖模型。最低价、最稳定，支持 Claude Code、Codex、OpenClaw 等主流客户端。">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23c4755a'/%3E%3Cpolygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2' fill='%23fff' transform='translate(3.6,3.6) scale(0.7)'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ====== DESIGN SYSTEM ====== */
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f8f8fa;
+      --surface: #ffffff;
+      --surface-hover: #fafafa;
+      --border: rgba(0,0,0,0.06);
+      --border-strong: rgba(0,0,0,0.12);
+      --accent: #c4755a;
+      --accent-hover: #b0664d;
+      --accent-light: rgba(196,117,90,0.08);
+      --accent-lighter: rgba(196,117,90,0.04);
+      --accent-gradient: linear-gradient(135deg, #d4956e, #c4755a);
+      --success: #3ea87a;
+      --text-primary: #111111;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 20px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.03);
+      --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: 'Inter', 'Noto Sans SC', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      /* Subtle grid pattern like WayToAGI */
+      background-image:
+        linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    ::selection { background: var(--accent); color: white; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ====== BUTTONS ====== */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-size: 14px; font-weight: 600; border: none; cursor: pointer;
+      border-radius: var(--radius); transition: all 0.2s; text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-ghost {
+      padding: 8px 16px; color: var(--text-secondary); background: transparent;
+    }
+    .btn-ghost:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
+    .btn-primary {
+      padding: 8px 20px; color: white; background: var(--accent);
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    /* ====== FOCUS ====== */
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ====== NAV ====== */
+    html { scroll-padding-top: 76px; }
+    body { padding-top: 64px; }
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: transform 0.3s ease;
+    }
+    .nav.nav-hidden { transform: translateY(-100%); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; gap: 16px;
+    }
+    .nav-logo {
+      font-size: 17px; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--text-primary); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+    }
+    .nav-logo-mark {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: var(--accent-gradient); color: white;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      padding: 8px 14px; font-size: 14px; font-weight: 500;
+      color: var(--text-secondary); text-decoration: none; border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .nav-link:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
+    .nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .nav-cta { padding: 8px 16px; font-size: 13px; }
+    .nav-menu-btn {
+      display: none; width: 44px; height: 44px;
+      align-items: center; justify-content: center;
+      background: none; border: none; border-radius: 10px;
+      color: var(--text-primary); cursor: pointer;
+    }
+    .nav-menu-btn:hover { background: rgba(0,0,0,0.04); }
+
+    /* ====== TOAST ====== */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: #1a1a2e; color: white;
+      font-size: 13px; font-weight: 500;
+      padding: 10px 20px; border-radius: 999px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 200; box-shadow: var(--shadow-md);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ====== SCROLL REVEAL ====== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+
+    /* ====== HERO ====== */
+    .hero {
+      padding: 80px 0 64px;
+      position: relative;
+    }
+    /* Aurora glow orbs like WayToAGI */
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero::before {
+      width: 600px; height: 600px;
+      top: -200px; left: -100px;
+      background: radial-gradient(circle, rgba(196,117,90,0.12), transparent 70%);
+    }
+    .hero::after {
+      width: 500px; height: 500px;
+      top: -100px; right: -150px;
+      background: radial-gradient(circle, rgba(196,117,90,0.08), transparent 70%);
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 999px;
+      background: var(--accent-light); color: var(--accent);
+      font-size: 13px; font-weight: 500; margin-bottom: 20px;
+      border: 1px solid rgba(196,117,90,0.12);
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+      font-weight: 900; line-height: 1.1; letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      overflow: hidden;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero h1::after {
+      content: '';
+      position: absolute;
+      top: -20%; left: -80%; bottom: -20%;
+      width: 30%;
+      transform: skewX(-25deg);
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(196,117,90,0.04) 10%,
+        rgba(255,255,255,0.15) 25%,
+        rgba(255,255,255,0.35) 45%,
+        rgba(255,255,255,0.5) 50%,
+        rgba(255,255,255,0.35) 55%,
+        rgba(255,255,255,0.15) 75%,
+        rgba(196,117,90,0.04) 90%,
+        transparent 100%
+      );
+      animation: heroShine 4.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      pointer-events: none;
+    }
+    @keyframes heroShine {
+      0% { left: -100%; }
+      50%, 100% { left: 200%; }
+    }
+
+    .hero-sub {
+      font-size: 17px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .hero-actions .btn-primary { font-size: 15px; padding: 14px 28px; }
+    .hero-actions .btn-ghost { font-size: 15px; padding: 14px 28px; }
+
+    /* Hero terminal */
+    .hero-terminal {
+      background: #1a1a2e;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2), 0 0 80px rgba(196,117,90,0.08);
+      position: relative;
+    }
+    /* Glow under terminal like WayToAGI */
+    .hero-terminal::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: 10%; right: 10%; height: 80px;
+      background: radial-gradient(ellipse, rgba(196,117,90,0.15), transparent 70%);
+      filter: blur(20px);
+      pointer-events: none;
+    }
+    .terminal-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .terminal-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .terminal-dot.red { background: #ff5f57; }
+    .terminal-dot.yellow { background: #febc2e; }
+    .terminal-dot.green { background: #28c840; }
+    .terminal-title {
+      flex: 1; text-align: center; font-size: 12px; color: rgba(255,255,255,0.4);
+      font-family: var(--mono);
+    }
+    .terminal-copy {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6); font-size: 11px; font-family: var(--mono);
+      padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    }
+    .terminal-copy:hover { background: rgba(255,255,255,0.14); color: white; }
+    .terminal-body {
+      padding: 20px;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.8;
+      color: #e0e0e0;
+      min-height: 280px;
+    }
+    .terminal-body .prompt { color: #28c840; }
+    .terminal-body .cmd { color: #f0f0f0; }
+    .terminal-body .flag { color: #d4956e; }
+    .terminal-body .str { color: #a8e6a1; }
+    .terminal-body .comment { color: rgba(255,255,255,0.3); }
+
+    /* ====== STATS BAR ====== */
+    .stats {
+      padding: 64px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 900; letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .stat-value span { color: var(--accent); }
+    .stat-label { font-size: 14px; color: var(--text-tertiary); }
+
+    /* ====== SECTION ====== */
+    .section { padding: 100px 0; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .section-header h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .section-header p { color: var(--text-secondary); font-size: 15px; }
+
+    /* ====== CARDS ====== */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+    /* ====== FEATURES ====== */
+    .features-row-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .features-row-2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--accent-light); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .feature-icon svg { width: 20px; height: 20px; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+    .feature-card.wide {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      align-items: center; padding: 32px;
+    }
+    .feature-metrics { display: flex; flex-direction: column; gap: 16px; }
+    .metric { text-align: center; padding: 16px; background: var(--bg-alt); border-radius: var(--radius); }
+    .metric-value { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.03em; color: var(--accent); }
+    .metric-value span { font-size: 0.85rem; color: var(--text-tertiary); font-weight: 500; }
+    .metric-label { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+
+    /* ====== STEPS ====== */
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .step-card { text-align: center; position: relative; }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--accent); color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 700; margin: 0 auto 14px;
+    }
+    .step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .step-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+    .step-card::after {
+      content: '';
+      position: absolute; top: 20px; right: -10px;
+      width: 20px; height: 2px;
+      background: var(--accent-light);
+    }
+    .step-card:last-child::after { display: none; }
+
+    /* ====== MODELS ====== */
+    .models-section { overflow: hidden; }
+    .models-header { text-align: center; margin-bottom: 48px; }
+    .models-header h2 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;
+    }
+    .models-header p { color: var(--text-secondary); font-size: 15px; }
+
+    .model-tabs {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .model-tab {
+      padding: 8px 18px; border-radius: 999px;
+      background: var(--surface); border: 1px solid var(--border);
+      font-size: 13px; font-weight: 600; color: var(--text-secondary);
+      font-family: inherit; cursor: pointer; transition: all 0.2s;
+    }
+    .model-tab:hover { color: var(--text-primary); border-color: var(--border-strong); }
+    .model-tab.active { background: var(--accent-gradient); color: white; border-color: var(--accent); }
+
+    .models-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    .model-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .model-item:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); border-color: var(--border-strong); }
+    .model-item.hot { border-color: rgba(196,117,90,0.3); background: var(--accent-lighter); }
+    .model-info { display: flex; align-items: center; gap: 12px; }
+    .model-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .model-icon.anthropic { background: var(--accent-gradient); }
+    .model-icon.openai { background: linear-gradient(135deg, #2a2a2a, #4a4a4a); }
+    .model-icon.google { background: linear-gradient(135deg, #4285f4, #34a853); }
+    .model-icon.deepseek { background: linear-gradient(135deg, #2563eb, #6366f1); }
+    .model-icon.qwen { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+    .model-icon.mistral { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .model-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .model-item .model-tag { font-size: 12px; color: var(--text-tertiary); }
+    .model-item .model-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; max-width: 280px; }
+    .model-item .status-badge {
+      font-size: 11px; font-weight: 600; padding: 3px 10px;
+      border-radius: 999px; margin-left: 8px;
+    }
+    .model-item .status-badge.available { background: rgba(62,168,122,0.1); color: var(--success); }
+    .model-item .status-badge.coming-soon { background: rgba(0,0,0,0.04); color: var(--text-tertiary); }
+    .model-item .model-desc-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .model-item .scenario-tag {
+      font-size: 11px; padding: 2px 8px; border-radius: 999px;
+      background: var(--accent-lighter); color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .model-item .scenario-tag.hot { background: rgba(196,117,90,0.08); color: var(--accent); border-color: rgba(196,117,90,0.15); }
+    .model-item .coming-overlay {
+      position: absolute; inset: 0; background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(2px); border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+    .model-item .coming-overlay span {
+      font-size: 13px; font-weight: 700; color: var(--text-tertiary);
+      padding: 6px 16px; border: 2px solid var(--border-strong);
+      border-radius: 999px; background: var(--surface);
+    }
+    .model-item { position: relative; overflow: hidden; }
+
+    .models-summary {
+      margin-top: 32px; padding: 24px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .models-summary p { font-size: 14px; color: var(--text-secondary); }
+    .models-summary .providers { display: flex; gap: 16px; flex-wrap: wrap; }
+    .models-summary .prov {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; color: var(--text-primary);
+    }
+    .models-summary .prov-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ====== WHY SIMPLE (No subscriptions) ====== */
+    .nope-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .nope-card { text-align: center; padding: 24px 16px; }
+    .nope-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--accent-light); color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .nope-icon svg { width: 18px; height: 18px; }
+    .nope-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .nope-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+    .promise-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+    }
+    .promise-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .promise-item { display: flex; gap: 14px; align-items: flex-start; }
+    .promise-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(62,168,122,0.08); color: var(--success);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .promise-icon svg { width: 16px; height: 16px; }
+    .promise-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+    .promise-item p { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+
+    /* ====== REFERRAL (500K reward) ====== */
+    .referral { background: var(--bg-alt); }
+    .referral .section { padding: 100px 0; }
+
+    /* Big reward showcase card */
+    .reward-showcase {
+      max-width: 680px; margin: 0 auto 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 32px 32px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .reward-showcase::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent-gradient);
+    }
+    .reward-split {
+      display: flex; align-items: center; justify-content: center; gap: 20px;
+    }
+    .reward-side { flex: 1; }
+    .reward-label {
+      font-size: 13px; font-weight: 600; color: var(--text-tertiary);
+      margin-bottom: 8px;
+    }
+    .reward-amount {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900; letter-spacing: -0.03em;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .reward-unit {
+      font-size: 14px; color: var(--text-secondary); margin-top: 4px;
+    }
+    .reward-divider {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      color: var(--text-tertiary);
+    }
+    .reward-connector {
+      font-size: 20px; font-weight: 300; color: var(--text-tertiary);
+    }
+    .reward-note {
+      margin-top: 20px; padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 12px; color: var(--text-tertiary);
+    }
+    .reward-note svg { flex-shrink: 0; }
+
+    /* Free forever callout */
+    .free-forever {
+      max-width: 680px; margin: 24px auto 0;
+      background: linear-gradient(135deg, rgba(196,117,90,0.06), rgba(196,117,90,0.02));
+      border: 1px solid rgba(196,117,90,0.12);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .free-forever-icon {
+      flex-shrink: 0;
+      width: 56px; height: 56px; border-radius: 14px;
+      background: var(--accent-gradient);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .free-forever-text h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .free-forever-text p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* Redemption code box */
+    .redeem-box {
+      max-width: 680px; margin: 40px auto 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .redeem-icon {
+      flex-shrink: 0;
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(196,117,90,0.08);
+      color: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .redeem-content h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .redeem-content p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ====== FAQ ====== */
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 8px; overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: var(--border-strong); }
+    .faq-toggle {
+      width: 100%; padding: 16px 20px; background: none; border: none;
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text-primary);
+      text-align: left;
+    }
+    .faq-toggle svg { width: 16px; height: 16px; color: var(--text-tertiary); transition: transform 0.2s; }
+    .faq-item.open .faq-toggle svg { transform: rotate(180deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer-inner { padding: 0 20px 16px; font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+    /* ====== FOOTER ====== */
+    .footer {
+      padding: 48px 0 32px;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-logo {
+      font-size: 18px; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--text-primary); display: block; margin-bottom: 8px;
+    }
+    .footer-brand p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .footer-links, .footer-contact { display: flex; flex-direction: column; gap: 10px; }
+    .footer-contact-label {
+      font-size: 12px; font-weight: 600; color: var(--text-tertiary);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
+    }
+    .footer-link {
+      font-size: 13px; color: var(--text-secondary); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--accent); }
+    .footer-bottom {
+      padding-top: 24px; border-top: 1px solid var(--border);
+      text-align: center; font-size: 12px; color: var(--text-tertiary);
+    }
+
+    /* ====== CTA ====== */
+    .cta-section { padding: 40px 0 80px; }
+    .cta-box {
+      background: var(--accent-gradient);
+      border-radius: var(--radius-xl);
+      padding: 56px 32px;
+      text-align: center;
+      color: white;
+    }
+    .cta-box h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .cta-box p { font-size: 15px; opacity: 0.85; margin-bottom: 28px; }
+    .btn-white {
+      padding: 14px 32px; background: white; color: var(--accent);
+      border-radius: var(--radius); font-size: 15px; font-weight: 700;
+      border: none; cursor: pointer; transition: all 0.2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-white:hover { background: var(--surface-hover); transform: translateY(-1px); }
+
+    /* ====== MOBILE ====== */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute; top: 64px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 2px;
+        background: rgba(255,255,255,0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 12px 24px 16px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-link { padding: 12px 14px; }
+      .nav-menu-btn { display: inline-flex; }
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-terminal { font-size: 11px; }
+      .terminal-body { padding: 16px; min-height: auto; }
+      .feature-card.wide { grid-template-columns: 1fr; }
+      .feature-metrics { flex-direction: row; }
+      .metric { flex: 1; }
+      .features-row-1 { grid-template-columns: 1fr; }
+      .features-row-2 { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; gap: 16px; }
+      .step-card::after { display: none; }
+      .models-grid { grid-template-columns: 1fr; }
+      .models-summary { flex-direction: column; text-align: center; }
+      .nope-grid { grid-template-columns: repeat(2, 1fr); }
+      .promise-grid { grid-template-columns: 1fr; }
+      .reward-split { flex-direction: column; gap: 12px; }
+      .reward-divider { flex-direction: row; }
+      .reward-connector { display: none; }
+      .free-forever { flex-direction: column; text-align: center; }
+      .redeem-box { flex-direction: column; text-align: center; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .hero { padding: 48px 0 40px; }
+      .hero-sub { font-size: 16px; }
+      .hero-actions .btn-primary, .hero-actions .btn-ghost { font-size: 15px; padding: 14px 28px; }
+      .section { padding: 72px 0; }
+      .reward-showcase { padding: 28px 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .nope-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 32px 0 56px; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        <span class="nav-logo-mark">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </span>
+        ModelSet
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="主导航">
+        <a href="#features" class="nav-link">优势</a>
+        <a href="#models" class="nav-link">模型</a>
+        <a href="#pricing" class="nav-link">计费</a>
+        <a href="#referral" class="nav-link">邀请</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+      <div class="nav-right">
+        <a href="https://modelset.top/login" class="btn btn-primary nav-cta">获取 Key</a>
+        <button class="nav-menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false" aria-controls="navLinks">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge reveal">
+              <span class="hero-badge-dot"></span>
+              claude-fable-5 · 全面支持
+            </div>
+            <h1 class="reveal reveal-delay-1">一个 API Key<br><span>畅享全球顶尖模型</span></h1>
+            <p class="hero-sub reveal reveal-delay-2">ModelSet 聚合全球最强 AI 模型，以最低价、最稳定的方式为你提供 API 服务。支持 Claude Code、Codex、OpenClaw 等主流客户端。</p>
+            <div class="hero-actions reveal reveal-delay-3">
+              <a href="https://modelset.top/login" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                免费获取 API Key
+              </a>
+              <a href="#pricing" class="btn btn-ghost">没有套路</a>
+            </div>
+          </div>
+
+          <div class="hero-terminal reveal reveal-delay-3">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">~ terminal</span>
+              <button class="terminal-copy" id="terminalCopy" aria-label="复制配置命令">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                复制
+              </button>
+            </div>
+            <div class="terminal-body">
+              <div><span class="comment"># 配置环境变量</span></div>
+              <div><span class="prompt">$ </span><span class="cmd">export </span><span class="flag">ANTHROPIC_BASE_URL</span><span class="cmd">=</span><span class="str">"https://ai.modelset.top"</span></div>
+              <div><span class="prompt">$ </span><span class="cmd">export </span><span class="flag">ANTHROPIC_AUTH_TOKEN</span><span class="cmd">=</span><span class="str">"sk-xxxx"</span></div>
+              <br>
+              <div><span class="comment"># 开始使用</span></div>
+              <div><span class="prompt">$ </span><span class="cmd">claude</span></div>
+              <br>
+              <div><span class="comment"># ModelSet · 100K+ developers · 50+ models</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item reveal">
+            <div class="stat-value">100<span>K+</span></div>
+            <div class="stat-label">全球开发者</div>
+          </div>
+          <div class="stat-item reveal reveal-delay-1">
+            <div class="stat-value">50<span>+</span></div>
+            <div class="stat-label">接入模型数</div>
+          </div>
+          <div class="stat-item reveal reveal-delay-2">
+            <div class="stat-value">99.9<span>%</span></div>
+            <div class="stat-label">服务可用性</div>
+          </div>
+          <div class="stat-item reveal reveal-delay-3">
+            <div class="stat-value">&lt;100<span>ms</span></div>
+            <div class="stat-label">平均响应延迟</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">核心优势</span>
+          <h2>为什么选择 ModelSet</h2>
+          <p>让每一位开发者都能以最低成本使用全球最顶尖的 AI 模型</p>
+        </div>
+
+        <div class="features-row-1">
+          <div class="card feature-card wide reveal">
+            <div>
+              <div class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <h3>极致速度</h3>
+              <p>全球多地节点，智能路由策略，平均响应低于 100ms。多地容灾自动切换，关键时刻不掉链子。</p>
+            </div>
+            <div class="feature-metrics">
+              <div class="metric">
+                <div class="metric-value">&lt;100<span>ms</span></div>
+                <div class="metric-label">平均响应</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">6<span> 地</span></div>
+                <div class="metric-label">全球节点</div>
+              </div>
+              <div class="metric">
+                <div class="metric-value">99.9<span>%</span></div>
+                <div class="metric-label">可用性</div>
+              </div>
+            </div>
+          </div>
+          <div class="card feature-card reveal reveal-delay-1">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>稳定可靠</h3>
+            <p>99.9% 可用性，多链路冗余，关键时刻不掉线</p>
+          </div>
+        </div>
+
+        <div class="features-row-2">
+          <div class="card feature-card reveal">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <h3>超低价格</h3>
+            <p>行业最低价格，cc-max分组仅2x倍率</p>
+          </div>
+          <div class="card feature-card reveal reveal-delay-1">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+            <h3>全球覆盖</h3>
+            <p>50+ 主流 AI 模型，一站式 API，无需切换平台</p>
+          </div>
+          <div class="card feature-card reveal reveal-delay-2">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>开发者友好</h3>
+            <p>兼容 OpenAI / Anthropic 格式，一行配置切换</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODELS -->
+    <section class="section models-section" id="models">
+      <div class="container">
+        <div class="models-header reveal">
+          <span class="section-eyebrow">模型矩阵</span>
+          <h2>全球顶尖模型，一站接入</h2>
+          <p>一个 API Key 调用全部能力，支持 50+ 主流模型</p>
+        </div>
+
+        <div class="model-tabs reveal">
+          <button type="button" class="model-tab active" data-provider="all" aria-pressed="true">全部</button>
+          <button type="button" class="model-tab" data-provider="anthropic" aria-pressed="false">Anthropic</button>
+          <button type="button" class="model-tab" data-provider="openai" aria-pressed="false">OpenAI</button>
+          <button type="button" class="model-tab" data-provider="google" aria-pressed="false">Google</button>
+          <button type="button" class="model-tab" data-provider="other" aria-pressed="false">国产模型</button>
+        </div>
+
+        <div class="models-grid">
+          <div class="model-item hot reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Fable 5</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">Claude 5 家族全新模型，融合创意与推理，全面支持多模态与长上下文</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag hot">创意写作</span>
+                  <span class="scenario-tag">推理</span>
+                  <span class="scenario-tag">多模态</span>
+                  <span class="scenario-tag">长上下文</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item hot reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Sonnet 5</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">最新旗舰编码模型，超越 Sonnet 4，全任务域性能大幅提升</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag hot">编码</span>
+                  <span class="scenario-tag">Agent 任务</span>
+                  <span class="scenario-tag">多模态</span>
+                  <span class="scenario-tag">长上下文</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item hot reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Sonnet 4.6</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">增强版 Sonnet 系列，编码与推理能力全面提升</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag hot">编码</span>
+                  <span class="scenario-tag">推理</span>
+                  <span class="scenario-tag">Agent 任务</span>
+                  <span class="scenario-tag">内容创作</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Sonnet 4.5</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">经典 Sonnet 系列，速度与质量平衡的理想选择</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">编码</span>
+                  <span class="scenario-tag">数学推理</span>
+                  <span class="scenario-tag">研究分析</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Opus 4.8</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">最强推理旗舰，处理最复杂的科学计算、数学和代码难题</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">科学计算</span>
+                  <span class="scenario-tag">深度推理</span>
+                  <span class="scenario-tag">策略分析</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Opus 4.7</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">上一代推理旗舰，擅长复杂分析与长链任务</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">深度推理</span>
+                  <span class="scenario-tag">数据分析</span>
+                  <span class="scenario-tag">研究</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Opus 4.6</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">Opus 系列进化版，平衡深度与效率</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">复杂推理</span>
+                  <span class="scenario-tag">策略分析</span>
+                  <span class="scenario-tag">长文本</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Opus 4.5</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">经典 Opus 模型，适合深度分析与科研场景</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">科研</span>
+                  <span class="scenario-tag">分析</span>
+                  <span class="scenario-tag">内容创作</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="model-item reveal" data-provider="anthropic">
+            <div class="model-info">
+              <div class="model-icon anthropic">A</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Claude Haiku 4.5</h4>
+                  <span class="status-badge available">已开通</span>
+                </div>
+                <div class="model-desc">极速轻量模型，适合实时对话、简单分类和快速文本处理</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">实时对话</span>
+                  <span class="scenario-tag">文本分类</span>
+                  <span class="scenario-tag">快速提取</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="model-item reveal" data-provider="openai">
+            <div class="model-info">
+              <div class="model-icon openai">O</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>GPT-4.1</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">旗舰多模态模型，擅长指令遵循、创意写作和复杂任务编排</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">多模态</span>
+                  <span class="scenario-tag">创意写作</span>
+                  <span class="scenario-tag">任务编排</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+          <div class="model-item reveal" data-provider="openai">
+            <div class="model-info">
+              <div class="model-icon openai">O</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>o3</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">深度推理引擎，擅长数学证明、逻辑推理和分步问题求解</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">数学证明</span>
+                  <span class="scenario-tag">逻辑推理</span>
+                  <span class="scenario-tag">问题求解</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+          <div class="model-item reveal" data-provider="openai">
+            <div class="model-info">
+              <div class="model-icon openai">O</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>GPT-4.1 Mini</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">轻量高效模型，性价比高，适合日常对话和文本处理</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">日常对话</span>
+                  <span class="scenario-tag">翻译</span>
+                  <span class="scenario-tag">摘要生成</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+          <div class="model-item reveal" data-provider="openai">
+            <div class="model-info">
+              <div class="model-icon openai">O</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>DALL·E 3</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">文生图模型，根据自然语言描述生成高质量图像</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">图像生成</span>
+                  <span class="scenario-tag">创意设计</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+
+          <div class="model-item reveal" data-provider="google">
+            <div class="model-info">
+              <div class="model-icon google">G</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Gemini 2.5 Pro</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">超长上下文窗口，擅长文档理解、代码分析和大规模数据处理</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">长文档</span>
+                  <span class="scenario-tag">代码分析</span>
+                  <span class="scenario-tag">大数据</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+          <div class="model-item reveal" data-provider="google">
+            <div class="model-info">
+              <div class="model-icon google">G</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Gemini 2.5 Flash</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">极速推理模型，低延迟高吞吐，适合批量处理和实时应用</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">批量处理</span>
+                  <span class="scenario-tag">实时应用</span>
+                  <span class="scenario-tag">分类</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+
+          <div class="model-item reveal" data-provider="other">
+            <div class="model-info">
+              <div class="model-icon deepseek">D</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>DeepSeek V3</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">中文优化最强开源模型，适合中文语境下的创作与编码</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">中文创作</span>
+                  <span class="scenario-tag">代码生成</span>
+                  <span class="scenario-tag">知识问答</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+          <div class="model-item reveal" data-provider="other">
+            <div class="model-info">
+              <div class="model-icon qwen">Q</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Qwen 2.5 Max</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">阿里旗舰大模型，擅长多语言理解、代码生成和商业分析</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">商业分析</span>
+                  <span class="scenario-tag">多语言</span>
+                  <span class="scenario-tag">代码生成</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+          <div class="model-item reveal" data-provider="other">
+            <div class="model-info">
+              <div class="model-icon mistral">M</div>
+              <div>
+                <div class="model-desc-row">
+                  <h4>Mistral Large 2</h4>
+                  <span class="status-badge coming-soon">接入中</span>
+                </div>
+                <div class="model-desc">欧洲最强模型，多语言能力强，适合多语种业务场景</div>
+                <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;">
+                  <span class="scenario-tag">多语言</span>
+                  <span class="scenario-tag">翻译</span>
+                  <span class="scenario-tag">企业应用</span>
+                </div>
+              </div>
+            </div>
+            <div class="coming-overlay"><span>接入中</span></div>
+          </div>
+        </div>
+
+
+        <div class="models-summary reveal">
+          <p>除以上模型外，我们还支持以下厂商：</p>
+          <div class="providers">
+            <span class="prov"><span class="prov-dot" style="background:#6366f1"></span>Midjourney</span>
+            <span class="prov"><span class="prov-dot" style="background:#22d3ee"></span>Cohere</span>
+            <span class="prov"><span class="prov-dot" style="background:#f97316"></span>Groq</span>
+            <span class="prov"><span class="prov-dot" style="background:#10b981"></span>Perplexity</span>
+            <span class="prov"><span class="prov-dot" style="background:#a78bfa"></span>Stability AI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY SIMPLE -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">计费原则</span>
+          <h2>没有套路，只有真诚</h2>
+          <p>用多少充多少，余额永久有效，告别额度恐慌</p>
+        </div>
+
+        <!-- 拒绝什么 -->
+        <div class="nope-grid" style="margin-bottom: 32px;">
+          <div class="card nope-card reveal">
+            <div class="nope-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <h3>不订阅</h3>
+            <p>没有月费/年费，不用了就停，没有自动扣费</p>
+          </div>
+          <div class="card nope-card reveal reveal-delay-1">
+            <div class="nope-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <h3>不套餐</h3>
+            <p>没有固定档位，充值金额完全自由</p>
+          </div>
+          <div class="card nope-card reveal reveal-delay-2">
+            <div class="nope-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <h3>不分级</h3>
+            <p>没有会员等级，所有用户同等待遇</p>
+          </div>
+          <div class="card nope-card reveal reveal-delay-3">
+            <div class="nope-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </div>
+            <h3>无隐藏收费</h3>
+            <p>明码标价，无隐藏加价，无最低消费门槛</p>
+          </div>
+        </div>
+
+        <!-- 我们承诺 -->
+        <div class="promise-box reveal">
+          <div class="promise-grid">
+            <div class="promise-item">
+              <div class="promise-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>按量付费</h4>
+                <p>随充随用，用多少充多少，余额永久有效</p>
+              </div>
+            </div>
+            <div class="promise-item">
+              <div class="promise-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>价格最低</h4>
+                <p>全网最低价，不做任何隐藏加价</p>
+              </div>
+            </div>
+            <div class="promise-item">
+              <div class="promise-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>服务最稳</h4>
+                <p>全官方转发，99.9% 可用性保障</p>
+              </div>
+            </div>
+            <div class="promise-item">
+              <div class="promise-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <h4>满血模型</h4>
+                <p>全部官转，拒绝掺假、缩水、替换</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REFERRAL -->
+    <section class="referral" id="referral">
+      <div class="section">
+        <div class="container">
+          <div class="section-header reveal">
+            <span class="section-eyebrow">邀请奖励</span>
+            <h2>邀请好友，永久免费用</h2>
+            <p>我们只有一个活动：邀请 = 550 万额度</p>
+          </div>
+
+          <!-- Big reward card -->
+          <div class="reward-showcase reveal">
+            <div class="reward-split">
+              <div class="reward-side">
+                <div class="reward-label">邀请人</div>
+                <div class="reward-amount">5,000,000</div>
+                <div class="reward-unit">tokens 额度</div>
+              </div>
+              <div class="reward-divider">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                <span class="reward-connector">+</span>
+              </div>
+              <div class="reward-side">
+                <div class="reward-label">新用户</div>
+                <div class="reward-amount">500,000</div>
+                <div class="reward-unit">tokens 额度</div>
+              </div>
+            </div>
+            <div class="reward-note">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              双方同时到账，邀请数量无上限 · 多邀多得，永久有效
+            </div>
+          </div>
+
+          <!-- Free forever callout -->
+          <div class="free-forever reveal">
+            <div class="free-forever-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+            <div class="free-forever-text">
+              <h3>邀请制 = 永久免费</h3>
+              <p>持续邀请好友获取额度，你就可以<span style="color:var(--accent);font-weight:700">永久免费</span>使用所有满血模型。不需要充值一分钱，告别额度恐慌。</p>
+            </div>
+          </div>
+
+          <!-- How it works -->
+          <div class="steps-grid" style="margin-top: 40px;">
+            <div class="card step-card reveal">
+              <div class="step-num">1</div>
+              <h3>注册获取邀请码</h3>
+              <p>登录后在个人中心生成你的专属邀请码</p>
+            </div>
+            <div class="card step-card reveal reveal-delay-1">
+              <div class="step-num">2</div>
+              <h3>分享给朋友</h3>
+              <p>通过微信群、朋友圈、社交媒体分享</p>
+            </div>
+            <div class="card step-card reveal reveal-delay-2">
+              <div class="step-num">3</div>
+              <h3>双方瓜分 550 万</h3>
+              <p>好友用你的邀请码注册，额度自动到账</p>
+            </div>
+          </div>
+
+          <!-- Redemption code section -->
+          <div class="redeem-box reveal">
+            <div class="redeem-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <div class="redeem-content">
+              <h3>官方群兑换码</h3>
+              <p>加入 ModelSet 官方服务群，我们会不定时发放兑换码，可直接兑换额度使用。关注群消息，不错过每一次福利。</p>
+              <a href="https://modelset.top/about" class="btn btn-primary" style="margin-top:12px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+                加入官方群
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container" style="max-width: 720px;">
+        <div class="section-header reveal">
+          <span class="section-eyebrow">FAQ</span>
+          <h2>常见问题</h2>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-toggle">
+            ModelSet 是什么？
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">ModelSet 是一个 AI 模型中转服务平台，聚合了全球顶尖 AI 模型（包括 Anthropic、OpenAI、Google 等），通过统一的 API 接口为开发者提供稳定、高速、低成本的 AI 服务。</div></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-toggle">
+            如何开始使用？
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">1. 访问 modelset.top 注册<br>2. 获取 API Key<br>3. 配置 base_url 为 https://ai.modelset.top<br>4. 随充随用，用多少充多少，余额永久有效！</div></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-toggle">
+            支持哪些 AI 模型？
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">50+ 主流 AI 模型：Claude Fable 5/Sonnet 5/Sonnet 4.6/Sonnet 4.5、Claude Opus 4.8/4.7/4.6/4.5、Claude Haiku 4.5、GPT-4.1/GPT-4.1 Mini/o3、Gemini 2.5 Pro/Flash、DeepSeek V3、Qwen 2.5 Max、Mistral Large 2 等。</div></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <button class="faq-toggle">
+            邀请奖励是什么？
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">每邀请一位新用户注册，你将获得500万额度，新用户将获得50万额度。邀请数量无上限，持续邀请即可永久免费使用所有模型。额度实时到账，无需任何操作。</div></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <button class="faq-toggle">
+            支持哪些客户端？
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">兼容所有支持 OpenAI / Anthropic API 格式的客户端：Claude Code、Cursor、Codex、OpenClaw、Continue、LobeChat、NextChat 等。只需修改 base_url 和 API Key 即可无缝切换。</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h3>立即开始使用 ModelSet</h3>
+          <p>加入全球 100,000+ 开发者，以最低价格使用最顶尖的 AI 模型</p>
+          <a href="https://modelset.top/login" class="btn-white">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            免费获取 API Key
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="footer-logo">ModelSet</span>
+          <p>全球顶尖 AI 模型中转站<br>一个 Key，畅享所有大模型</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://modelset.top/login" class="footer-link">免费获取 API Key</a>
+          <a href="#features" class="footer-link">核心优势</a>
+          <a href="#models" class="footer-link">模型矩阵</a>
+          <a href="#referral" class="footer-link">邀请奖励</a>
+        </div>
+        <div class="footer-contact">
+          <span class="footer-contact-label">联系我们</span>
+          <a href="https://modelset.top/about" class="footer-link">官方服务群</a>
+          <a href="https://modelset.top/about" class="footer-link">帮助中心</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ModelSet. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">已复制到剪贴板</div>
+
+  <script>
+    // Nav: hide on scroll down, show on scroll up
+    const nav = document.getElementById('nav');
+    const navLinks = document.getElementById('navLinks');
+    const navMenuBtn = document.getElementById('navMenuBtn');
+    let lastY = window.pageYOffset;
+    window.addEventListener('scroll', () => {
+      const y = window.pageYOffset;
+      if (y > 240 && y > lastY && !navLinks.classList.contains('open')) {
+        nav.classList.add('nav-hidden');
+      } else {
+        nav.classList.remove('nav-hidden');
+      }
+      lastY = y;
+    }, { passive: true });
+
+    // Mobile menu
+    navMenuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navMenuBtn.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('.nav-link').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navMenuBtn.setAttribute('aria-expanded', 'false');
+    }));
+
+    // Terminal copy + toast
+    const TERMINAL_CMDS = 'export ANTHROPIC_BASE_URL="https://modelset.top"\nexport ANTHROPIC_AUTH_TOKEN="sk-xxxx"\nclaude';
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast() {
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      // file:// 等非安全上下文的回退方案
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      return Promise.resolve();
+    }
+    document.getElementById('terminalCopy').addEventListener('click', () => {
+      copyText(TERMINAL_CMDS).then(showToast);
+    });
+
+    // Scroll Reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Model tabs
+    document.querySelectorAll('.model-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.model-tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-pressed', 'false');
+        });
+        this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
+        const provider = this.dataset.provider;
+        document.querySelectorAll('.model-item').forEach(item => {
+          item.style.display = (provider === 'all' || item.dataset.provider === provider) ? 'flex' : 'none';
+        });
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function() {
+        const item = this.parentElement;
+        const answer = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-answer').style.maxHeight = '0';
+          i.querySelector('.faq-toggle').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          this.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // Smooth scroll (预留固定导航栏高度)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (!t) return;
+        e.preventDefault();
+        window.scrollTo({ top: t.getBoundingClientRect().top + pageYOffset - 72, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+---
+name: Bug Report
+about: Create a report to help us improve
+title: "[BUG] "
+labels: bug
+assignees: ""
+---
+
+**Describe the bug**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Client used: `Claude Code / Cursor / Other`
+2. Model used: `claude-sonnet-5`
+3. Request made: `...`
+4. Response received: `...`
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Environment:**
+- Client: [e.g. Claude Code 2.0]
+- OS: [e.g. macOS 14.0]
+- Model: [e.g. claude-sonnet-5]
+
+**Additional context**
+Add any other context about the problem here.
