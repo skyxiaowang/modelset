@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<img src="assets/logo.jpg" alt="ModelSet Logo" width="120" />
+
 **One API Key. All Models. Lowest Price.**
 
 一个 API Key，畅享全球顶尖 AI 模型。最低价、最稳定，支持 Claude Code、Codex、OpenClaw 等主流客户端。
@@ -105,7 +107,7 @@ That's it. For detailed setup instructions, see [docs/quick-start.md](docs/quick
 
 <div align="center">
 
-### 🎉 邀请新用户 = 永久免费用
+###  邀请新用户 = 永久免费用
 
 </div>
 
@@ -143,8 +145,8 @@ We have **one and only one campaign**: Invite new users to register and get rewa
 |:---:|:---|
 | ❌ No subscriptions (不订阅) | ✅ Pay-as-you-go, balance never expires (按量付费) |
 | ❌ No fixed bundles (不套餐) | ✅ Lowest prices, no hidden markups (价格最低) |
-| ❌ No membership tiers (不分级) | ✅ Equal access for all users (服务最稳) |
-| ❌ No hidden fees (无隐藏收费) | ✅ Transparent pricing, no minimum spend (满血模型) |
+|  No membership tiers (不分级) | ✅ Equal access for all users (服务最稳) |
+|  No hidden fees (无隐藏收费) | ✅ Transparent pricing, no minimum spend (满血模型) |
 
 **我们只有满血模型，拒绝掺假，全部官转。**
 
@@ -274,9 +276,18 @@ ModelSet works with **any client or SDK** that supports **OpenAI** or **Anthropi
 
 ## Community
 
-- 💬 [Official Service Group](https://ai.modelset.top/about) — Get help, share feedback, redeem codes
+-  [Official Service Group](https://ai.modelset.top/about) — Get help, share feedback, redeem codes
 - 🐛 [GitHub Issues](https://github.com/skyxiaowang/modelset/issues) — Report bugs, suggest features
 - 📝 [Help Center](https://ai.modelset.top/about) — Tutorials and guides
+- 🟢 **WeChat** — Scan QR code below to join our official group
+
+<div align="center">
+
+<img src="assets/wechat-qr.jpg" alt="WeChat QR Code" width="260" />
+
+扫码添加微信，加入官方服务群
+
+</div>
 
 ## Related Searches
 
