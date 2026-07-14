@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #13131a;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  padding: 32px;
+}
+.container {
+  width: 900px;
+  background: #13131a;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.chart { flex: 1; }
+.bar-group { margin-bottom: 16px; }
+.bar-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+.bars { display: flex; gap: 8px; align-items: center; }
+.bar {
+  height: 24px; border-radius: 6px;
+  display: flex; align-items: center; padding: 0 10px;
+  font-size: 10px; font-weight: 600; color: white;
+  font-family: 'JetBrains Mono', monospace;
+}
+.bar.official { background: linear-gradient(90deg, rgba(239,68,68,0.6), rgba(239,68,68,0.3)); }
+.bar.modelset { background: linear-gradient(90deg, #c4755a, #d4956e); }
+.legend { display: flex; gap: 16px; margin-top: 16px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: rgba(255,255,255,0.3); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+.legend-dot.official { background: rgba(239,68,68,0.5); }
+.legend-dot.modelset { background: #c4755a; }
+.note {
+  flex: 0 0 220px;
+  padding: 20px;
+  background: rgba(196,117,90,0.06);
+  border: 1px solid rgba(196,117,90,0.15);
+  border-radius: 12px;
+  font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7;
+}
+.note strong { color: #c4755a; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="chart">
+    <div class="bar-group">
+      <div class="bar-label">Claude Sonnet 4.6</div>
+      <div class="bars"><div class="bar official" style="width:320px;">$3/M tokens</div></div>
+      <div class="bars" style="margin-top:4px;"><div class="bar modelset" style="width:200px;">按中转价</div></div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-label">Claude Opus 4.8</div>
+      <div class="bars"><div class="bar official" style="width:400px;">$15/M tokens</div></div>
+      <div class="bars" style="margin-top:4px;"><div class="bar modelset" style="width:240px;">2x 倍率</div></div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-label">Gemini 2.5 Pro</div>
+      <div class="bars"><div class="bar official" style="width:280px;">$2.5/M tokens</div></div>
+      <div class="bars" style="margin-top:4px;"><div class="bar modelset" style="width:180px;">按中转价</div></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot official"></div>官方价格（含隐性成本）</div>
+      <div class="legend-item"><div class="legend-dot modelset"></div>ModelSet 中转价</div>
+    </div>
+  </div>
+  <div class="note">
+    <strong>按量付费</strong>，余额永久有效<br>
+    无月费 · 无套餐 · 无分级<br><br>
+    加上绑卡和网络成本，<br>
+    中转站实际比官方省 <strong>30-60%</strong>。
+  </div>
+</div>
+</body>
+</html>

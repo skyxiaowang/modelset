@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 900px; height: 280px; overflow: hidden; }
+body {
+  background: #13131a;
+  font-family: 'Inter', sans-serif;
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.pric-chart { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+.pric-bar-group { display: flex; flex-direction: column; gap: 6px; }
+.pric-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); }
+.pric-bars { display: flex; gap: 8px; align-items: center; }
+.pric-bar {
+  height: 24px; border-radius: 6px;
+  display: flex; align-items: center; padding: 0 10px;
+  font-size: 10px; font-weight: 600; color: white;
+  font-family: 'JetBrains Mono', monospace;
+}
+.pric-bar.official { background: linear-gradient(90deg, rgba(239,68,68,0.6), rgba(239,68,68,0.3)); }
+.pric-bar.modelset { background: linear-gradient(90deg, #c4755a, #d4956e); }
+.pric-legend { display: flex; gap: 16px; margin-top: 8px; }
+.pric-legend-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: rgba(255,255,255,0.3); }
+.pric-legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+.pric-legend-dot.official { background: rgba(239,68,68,0.5); }
+.pric-legend-dot.modelset { background: #c4755a; }
+.pric-note {
+  flex: 0 0 220px;
+  padding: 20px;
+  background: rgba(196,117,90,0.06);
+  border: 1px solid rgba(196,117,90,0.15);
+  border-radius: 12px;
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+.pric-note strong { color: #c4755a; }
+</style>
+</head>
+<body>
+
+<div class="pric-chart">
+  <div class="pric-bar-group">
+    <div class="pric-label">Claude Sonnet 4.6</div>
+    <div class="pric-bars">
+      <div class="pric-bar official" style="width:320px;">$3/M tokens</div>
+      <div class="pric-bar modelset" style="width:200px;">按中转价</div>
+    </div>
+  </div>
+  <div class="pric-bar-group">
+    <div class="pric-label">Claude Opus 4.8</div>
+    <div class="pric-bars">
+      <div class="pric-bar official" style="width:400px;">$15/M tokens</div>
+      <div class="pric-bar modelset" style="width:240px;">2x 倍率</div>
+    </div>
+  </div>
+  <div class="pric-bar-group">
+    <div class="pric-label">Gemini 2.5 Pro</div>
+    <div class="pric-bars">
+      <div class="pric-bar official" style="width:280px;">$2.5/M tokens</div>
+      <div class="pric-bar modelset" style="width:180px;">按中转价</div>
+    </div>
+  </div>
+  <div class="pric-legend">
+    <div class="pric-legend-item"><div class="pric-legend-dot official"></div>官方价格（含隐性成本）</div>
+    <div class="pric-legend-item"><div class="pric-legend-dot modelset"></div>ModelSet 中转价</div>
+  </div>
+</div>
+<div class="pric-note">
+  <strong>按量付费</strong>，余额永久有效<br>
+  无月费 · 无套餐 · 无分级<br><br>
+  加上绑卡和网络成本，<br>
+  中转站实际比官方省 <strong>30-60%</strong>。
+</div>
+</body>
+</html>

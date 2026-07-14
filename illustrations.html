@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0f0f12;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  padding: 40px 0;
+}
+
+/* ====== ILLUSTRATION 1: HERO ====== */
+.ill-hero {
+  width: 900px;
+  height: 480px;
+  background: linear-gradient(135deg, #0f0f12 0%, #1a1520 50%, #0f0f12 100%);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ill-hero::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  top: -200px; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(196,117,90,0.15), transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+}
+.ill-hero .center-key {
+  position: relative; z-index: 2;
+  width: 120px; height: 120px;
+  background: linear-gradient(135deg, #d4956e, #c4755a);
+  border-radius: 28px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 80px rgba(196,117,90,0.3);
+}
+.ill-hero .center-key svg { width: 56px; height: 56px; color: white; }
+.ill-hero .orbit {
+  position: absolute;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 50%;
+  animation: spin 30s linear infinite;
+}
+.ill-hero .orbit:nth-child(2) { width: 300px; height: 300px; }
+.ill-hero .orbit:nth-child(3) { width: 450px; height: 450px; animation-duration: 45s; animation-direction: reverse; }
+.ill-hero .orbit:nth-child(4) { width: 600px; height: 600px; animation-duration: 60s; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ill-hero .node {
+  position: absolute;
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.ill-hero .node.anthropic { background: linear-gradient(135deg, #d4956e, #c4755a); }
+.ill-hero .node.openai { background: linear-gradient(135deg, #2a2a2a, #4a4a4a); }
+.ill-hero .node.google { background: linear-gradient(135deg, #4285f4, #34a853); }
+.ill-hero .node.deepseek { background: linear-gradient(135deg, #2563eb, #6366f1); }
+.ill-hero .node.qwen { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+.ill-hero .node.mistral { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+
+.ill-hero .node-label {
+  position: absolute;
+  font-size: 10px; color: rgba(255,255,255,0.4);
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+
+/* orbit 1 nodes */
+.ill-hero .n1 { top: 80px; left: 50%; transform: translateX(-50%); }
+.ill-hero .n2 { top: 50%; right: 60px; transform: translateY(-50%); }
+.ill-hero .n3 { bottom: 80px; left: 50%; transform: translateX(-50%); }
+.ill-hero .n4 { top: 50%; left: 60px; transform: translateY(-50%); }
+/* orbit 2 nodes */
+.ill-hero .n5 { top: 40px; right: 120px; }
+.ill-hero .n6 { bottom: 40px; right: 120px; }
+.ill-hero .n7 { bottom: 40px; left: 120px; }
+.ill-hero .n8 { top: 40px; left: 120px; }
+
+/* ====== ILLUSTRATION 2: PAIN POINTS ====== */
+.ill-pain {
+  width: 900px;
+  height: 360px;
+  background: #13131a;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.ill-pain .pain-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ill-pain .pain-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.ill-pain .pain-card:nth-child(1)::before { background: #ef4444; }
+.ill-pain .pain-card:nth-child(2)::before { background: #f59e0b; }
+.ill-pain .pain-card:nth-child(3)::before { background: #a855f7; }
+.ill-pain .pain-card:nth-child(4)::before { background: #3b82f6; }
+.ill-pain .pain-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ill-pain .pain-icon svg { width: 24px; height: 24px; }
+.ill-pain .pain-card:nth-child(1) .pain-icon { background: rgba(239,68,68,0.1); color: #ef4444; }
+.ill-pain .pain-card:nth-child(2) .pain-icon { background: rgba(245,158,11,0.1); color: #f59e0b; }
+.ill-pain .pain-card:nth-child(3) .pain-icon { background: rgba(168,85,247,0.1); color: #a855f7; }
+.ill-pain .pain-card:nth-child(4) .pain-icon { background: rgba(59,130,246,0.1); color: #3b82f6; }
+.ill-pain .pain-title { font-size: 16px; font-weight: 700; color: #e0e0e0; margin-bottom: 8px; }
+.ill-pain .pain-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+/* ====== ILLUSTRATION 3: ARCHITECTURE ====== */
+.ill-arch {
+  width: 900px;
+  height: 400px;
+  background: #13131a;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+}
+.ill-arch .arch-title {
+  font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.4);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px;
+}
+.ill-arch .arch-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 20px;
+  position: relative;
+}
+.ill-arch .arch-row + .arch-row { border-top: 1px solid rgba(255,255,255,0.06); }
+.ill-arch .arch-label {
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.3);
+  writing-mode: vertical-lr; transform: rotate(180deg);
+  position: absolute; left: -10px; top: 50%; transform: translateX(-50%) translateY(-50%) rotate(180deg);
+  letter-spacing: 0.08em;
+}
+.ill-arch .arch-user {
+  width: 72px; height: 72px; border-radius: 18px;
+  background: linear-gradient(135deg, #2a2a3e, #1e1e30);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ill-arch .arch-user svg { width: 28px; height: 28px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+.ill-arch .arch-user span { font-size: 9px; color: rgba(255,255,255,0.3); }
+.ill-arch .arch-connector {
+  flex: 1; height: 2px; position: relative;
+}
+.ill-arch .arch-connector.dashed { background: repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0, rgba(255,255,255,0.1) 8px, transparent 8px, transparent 16px); }
+.ill-arch .arch-connector.solid { background: linear-gradient(90deg, rgba(196,117,90,0.6), rgba(196,117,90,0.2)); }
+.ill-arch .arch-tag {
+  position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; font-weight: 500; white-space: nowrap;
+}
+.ill-arch .arch-connector.dashed .arch-tag { color: rgba(239,68,68,0.7); }
+.ill-arch .arch-connector.solid .arch-tag { color: rgba(196,117,90,0.8); }
+.ill-arch .arch-models {
+  flex: 1; display: flex; flex-direction: column; gap: 8px; justify-content: center;
+}
+.ill-arch .arch-models.multi { flex-direction: row; gap: 8px; flex-wrap: wrap; }
+.ill-arch .arch-m-box {
+  padding: 8px 14px; border-radius: 8px;
+  font-size: 10px; font-weight: 600; color: white;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.ill-arch .arch-m-box.a { background: linear-gradient(135deg, #d4956e, #c4755a); }
+.ill-arch .arch-m-box.o { background: linear-gradient(135deg, #2a2a2a, #4a4a4a); }
+.ill-arch .arch-m-box.g { background: linear-gradient(135deg, #4285f4, #34a853); }
+.ill-arch .arch-m-box.d { background: linear-gradient(135deg, #2563eb, #6366f1); }
+.ill-arch .arch-m-box.q { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+.ill-arch .arch-m-box.m { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.ill-arch .arch-m-box.ms { background: linear-gradient(135deg, #d4956e, #c4755a); }
+.ill-arch .arch-relay {
+  width: 80px; height: 80px; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(196,117,90,0.2), rgba(196,117,90,0.05));
+  border: 1px solid rgba(196,117,90,0.3);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.ill-arch .arch-relay svg { width: 28px; height: 28px; color: #c4755a; margin-bottom: 4px; }
+.ill-arch .arch-relay span { font-size: 9px; color: rgba(196,117,90,0.7); font-weight: 600; }
+
+/* ====== ILLUSTRATION 4: SCENARIOS ====== */
+.ill-scenarios {
+  width: 900px;
+  height: 320px;
+  background: #13131a;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.ill-scenarios .sc-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+}
+.ill-scenarios .sc-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 24px; right: 24px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196,117,90,0.3), transparent);
+}
+.ill-scenarios .sc-avatar {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.ill-scenarios .sc-avatar svg { width: 22px; height: 22px; }
+.ill-scenarios .sc-card:nth-child(1) .sc-avatar { background: linear-gradient(135deg, #2563eb, #6366f1); color: white; }
+.ill-scenarios .sc-card:nth-child(2) .sc-avatar { background: linear-gradient(135deg, #c4755a, #d4956e); color: white; }
+.ill-scenarios .sc-card:nth-child(3) .sc-avatar { background: linear-gradient(135deg, #10b981, #34d399); color: white; }
+.ill-scenarios .sc-name { font-size: 14px; font-weight: 700; color: #e0e0e0; margin-bottom: 4px; }
+.ill-scenarios .sc-role { font-size: 11px; color: rgba(255,255,255,0.3); margin-bottom: 14px; }
+.ill-scenarios .sc-stat {
+  display: flex; align-items: baseline; gap: 4px;
+  margin-bottom: 4px;
+}
+.ill-scenarios .sc-stat .sc-val {
+  font-size: 22px; font-weight: 900; color: #c4755a;
+  font-family: 'JetBrains Mono', monospace;
+}
+.ill-scenarios .sc-stat .sc-unit { font-size: 11px; color: rgba(255,255,255,0.3); }
+.ill-scenarios .sc-desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+/* ====== ILLUSTRATION 5: REFERRAL ====== */
+.ill-referral {
+  width: 900px;
+  height: 240px;
+  background: #13131a;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.ill-referral .ref-card {
+  flex: 1;
+  max-width: 300px;
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.ill-referral .ref-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #c4755a, transparent);
+}
+.ill-referral .ref-label {
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.4);
+  margin-bottom: 12px;
+}
+.ill-referral .ref-amount {
+  font-size: 40px; font-weight: 900; color: #c4755a;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1;
+}
+.ill-referral .ref-unit { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+.ill-referral .ref-arrow {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: rgba(196,117,90,0.5);
+}
+.ill-referral .ref-arrow svg { width: 32px; height: 32px; }
+.ill-referral .ref-arrow span { font-size: 10px; }
+
+/* ====== ILLUSTRATION 6: PRICING COMPARISON ====== */
+.ill-pricing {
+  width: 900px;
+  height: 280px;
+  background: #13131a;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 40px;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.ill-pricing .pric-chart {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ill-pricing .pric-bar-group { display: flex; flex-direction: column; gap: 6px; }
+.ill-pricing .pric-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.5); }
+.ill-pricing .pric-bars { display: flex; gap: 8px; align-items: center; }
+.ill-pricing .pric-bar {
+  height: 24px; border-radius: 6px;
+  display: flex; align-items: center; padding: 0 10px;
+  font-size: 10px; font-weight: 600; color: white;
+  font-family: 'JetBrains Mono', monospace;
+}
+.ill-pricing .pric-bar.official { background: linear-gradient(90deg, rgba(239,68,68,0.6), rgba(239,68,68,0.3)); }
+.ill-pricing .pric-bar.modelset { background: linear-gradient(90deg, #c4755a, #d4956e); }
+.ill-pricing .pric-legend {
+  display: flex; gap: 16px; margin-top: 8px;
+}
+.ill-pricing .pric-legend-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 10px; color: rgba(255,255,255,0.3);
+}
+.ill-pricing .pric-legend-dot {
+  width: 10px; height: 10px; border-radius: 3px;
+}
+.ill-pricing .pric-legend-dot.official { background: rgba(239,68,68,0.5); }
+.ill-pricing .pric-legend-dot.modelset { background: #c4755a; }
+.ill-pricing .pric-note {
+  flex: 0 0 220px;
+  padding: 20px;
+  background: rgba(196,117,90,0.06);
+  border: 1px solid rgba(196,117,90,0.15);
+  border-radius: 12px;
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+.ill-pricing .pric-note strong { color: #c4755a; }
+</style>
+</head>
+<body>
+
+<!-- ILLUSTRATION 1: HERO - One Key All Models -->
+<div class="ill-hero">
+  <div class="center-key">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3-3.5 3.5"/>
+    </svg>
+  </div>
+  <div class="orbit"></div>
+  <div class="orbit"></div>
+  <div class="orbit"></div>
+
+  <!-- Inner orbit -->
+  <div class="node anthropic n1">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 19h20L12 2zm0 4l7.53 13H4.47L12 6z"/></svg>
+  </div>
+  <div class="node openai n2">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.28 11.24a8.14 8.14 0 0 0-1.21-1.53 9.53 9.53 0 0 0-1.34-1.15L18.27 7.5l1.46-1.46a.57.57 0 0 0 0-.8l-2-2a.57.57 0 0 0-.8 0L15.47 4.7l-1.06-1.47a9.53 9.53 0 0 0-1.15-1.34A8.14 8.14 0 0 0 11.74.69a10.12 10.12 0 0 0-3.48 0 8.14 8.14 0 0 0-1.53 1.21 9.53 9.53 0 0 0-1.15 1.34L4.53 4.7l-1.46-1.46a.57.57 0 0 0-.8 0l-2 2a.57.57 0 0 0 0 .8L1.73 7.5.27 8.96A9.53 9.53 0 0 0-.88 10.1a8.14 8.14 0 0 0-1.21 1.53 10.12 10.12 0 0 0 0 3.48 8.14 8.14 0 0 0 1.21 1.53 9.53 9.53 0 0 0 1.15 1.34l1.46 1.06-1.46 1.46a.57.57 0 0 0 0 .8l2 2a.57.57 0 0 0 .8 0l1.46-1.46 1.06 1.46a9.53 9.53 0 0 0 1.34 1.15 8.14 8.14 0 0 0 1.53 1.21 10.12 10.12 0 0 0 3.48 0 8.14 8.14 0 0 0 1.53-1.21 9.53 9.53 0 0 0 1.34-1.15l1.06-1.46 1.46 1.46a.57.57 0 0 0 .8 0l2-2a.57.57 0 0 0 0-.8l-1.46-1.46 1.46-1.06a9.53 9.53 0 0 0 1.15-1.34 8.14 8.14 0 0 0 1.21-1.53 10.12 10.12 0 0 0 0-3.48zM12 18.5a6.5 6.5 0 1 1 6.5-6.5 6.5 6.5 0 0 1-6.5 6.5z"/></svg>
+  </div>
+  <div class="node google n3">G</div>
+  <div class="node deepseek n4">D</div>
+
+  <!-- Outer orbit -->
+  <div class="node qwen n5">Q</div>
+  <div class="node mistral n6">M</div>
+  <div class="node anthropic n7" style="font-size:10px;">C</div>
+  <div class="node openai n8" style="font-size:10px;">O</div>
+</div>
+
+<!-- ILLUSTRATION 2: PAIN POINTS -->
+<div class="ill-pain">
+  <div class="pain-card">
+    <div class="pain-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+        <line x1="12" y1="16" x2="12" y2="12" stroke-width="3"/>
+      </svg>
+    </div>
+    <div class="pain-title">绑卡难</div>
+    <div class="pain-desc">海外信用卡、虚拟卡<br>随时风控，Key 作废</div>
+  </div>
+  <div class="pain-card">
+    <div class="pain-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+      </svg>
+    </div>
+    <div class="pain-title">网络抖</div>
+    <div class="pain-desc">直连境外，时高时低<br>流式响应易断</div>
+  </div>
+  <div class="pain-card">
+    <div class="pain-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+      </svg>
+    </div>
+    <div class="pain-title">价格贵</div>
+    <div class="pain-desc">Opus $15/M tokens<br>重度使用账单高</div>
+  </div>
+  <div class="pain-card">
+    <div class="pain-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    <div class="pain-title">限速严</div>
+    <div class="pain-desc">免费 tier 经常触发<br>升级流程繁琐</div>
+  </div>
+</div>
+
+<!-- ILLUSTRATION 3: ARCHITECTURE COMPARISON -->
+<div class="ill-arch">
+  <!-- BEFORE -->
+  <div style="font-size:13px; font-weight:600; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:16px;">Before: 分散接入</div>
+  <div style="flex:1; display:flex; align-items:center; gap:16px;">
+    <div class="arch-user">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>开发者</span>
+    </div>
+    <div style="flex:1; display:flex; flex-direction:column; gap:8px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="arch-connector dashed" style="width:80px; flex:none;">
+          <span class="arch-tag" style="color:rgba(239,68,68,0.7);">绑卡+翻墙</span>
+        </div>
+        <div class="arch-m-box a">Anthropic API</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="arch-connector dashed" style="width:80px; flex:none;">
+          <span class="arch-tag" style="color:rgba(239,68,68,0.7);">海外卡</span>
+        </div>
+        <div class="arch-m-box o">OpenAI API</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="arch-connector dashed" style="width:80px; flex:none;">
+          <span class="arch-tag" style="color:rgba(239,68,68,0.7);">注册困难</span>
+        </div>
+        <div class="arch-m-box g">Google AI API</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div class="arch-connector dashed" style="width:80px; flex:none;">
+          <span class="arch-tag" style="color:rgba(239,68,68,0.7);">多 Key</span>
+        </div>
+        <div class="arch-m-box d">DeepSeek / Qwen</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AFTER -->
+  <div style="font-size:13px; font-weight:600; color:rgba(196,117,90,0.6); text-transform:uppercase; letter-spacing:0.1em; margin-top:24px; margin-bottom:16px;">After: ModelSet 统一接入</div>
+  <div style="flex:1; display:flex; align-items:center; gap:16px;">
+    <div class="arch-user">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>开发者</span>
+    </div>
+    <div class="arch-connector solid" style="width:80px; flex:none;">
+      <span class="arch-tag">1 个 Key</span>
+    </div>
+    <div class="arch-relay">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      <span>ModelSet</span>
+    </div>
+    <div class="arch-connector solid" style="width:80px; flex:none;">
+      <span class="arch-tag">官方转发</span>
+    </div>
+    <div style="flex:1; display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center;">
+      <div class="arch-m-box a">Claude</div>
+      <div class="arch-m-box o">GPT</div>
+      <div class="arch-m-box g">Gemini</div>
+      <div class="arch-m-box d">DeepSeek</div>
+      <div class="arch-m-box q">Qwen</div>
+      <div class="arch-m-box m">Mistral</div>
+    </div>
+  </div>
+</div>
+
+<!-- ILLUSTRATION 4: SCENARIOS -->
+<div class="ill-scenarios">
+  <div class="sc-card">
+    <div class="sc-avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    </div>
+    <div class="sc-name">独立开发者</div>
+    <div class="sc-role">同时用 Claude Code + Cursor</div>
+    <div class="sc-stat">
+      <span class="sc-val">~¥50</span>
+      <span class="sc-unit">/月</span>
+    </div>
+    <div class="sc-desc">从 $100+/月降到几十块人民币，一个 Key 全搞定</div>
+  </div>
+  <div class="sc-card">
+    <div class="sc-avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    </div>
+    <div class="sc-name">创业团队</div>
+    <div class="sc-role">5 人团队，多模型测试</div>
+    <div class="sc-stat">
+      <span class="sc-val">1 平台</span>
+      <span class="sc-unit">统一管理</span>
+    </div>
+    <div class="sc-desc">共用一个平台，账单清晰，不用每人各自折腾</div>
+  </div>
+  <div class="sc-card">
+    <div class="sc-avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
+    </div>
+    <div class="sc-name">学生党</div>
+    <div class="sc-role">预算有限，学习 + 项目</div>
+    <div class="sc-stat">
+      <span class="sc-val">500万</span>
+      <span class="sc-unit">token 免费额度</span>
+    </div>
+    <div class="sc-desc">邀请活动拿额度 + 低价，日常学习够用了</div>
+  </div>
+</div>
+
+<!-- ILLUSTRATION 5: REFERRAL -->
+<div class="ill-referral">
+  <div class="ref-card">
+    <div class="ref-label">邀请人获得</div>
+    <div class="ref-amount">500万</div>
+    <div class="ref-unit">tokens 额度 / 人</div>
+  </div>
+  <div class="ref-arrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <span>双方同时到账</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  </div>
+  <div class="ref-card">
+    <div class="ref-label">新用户获得</div>
+    <div class="ref-amount" style="font-size:32px; color:rgba(196,117,90,0.7);">50万</div>
+    <div class="ref-unit">tokens 额度</div>
+  </div>
+</div>
+
+<!-- ILLUSTRATION 6: PRICING COMPARISON -->
+<div class="ill-pricing">
+  <div class="pric-chart">
+    <div class="pric-bar-group">
+      <div class="pric-label">Claude Sonnet 4.6</div>
+      <div class="pric-bars">
+        <div class="pric-bar official" style="width:320px;">$3/M tokens</div>
+        <div class="pric-bar modelset" style="width:200px;">按中转价</div>
+      </div>
+    </div>
+    <div class="pric-bar-group">
+      <div class="pric-label">Claude Opus 4.8</div>
+      <div class="pric-bars">
+        <div class="pric-bar official" style="width:400px;">$15/M tokens</div>
+        <div class="pric-bar modelset" style="width:240px;">2x 倍率</div>
+      </div>
+    </div>
+    <div class="pric-bar-group">
+      <div class="pric-label">Gemini 2.5 Pro</div>
+      <div class="pric-bars">
+        <div class="pric-bar official" style="width:280px;">$2.5/M tokens</div>
+        <div class="pric-bar modelset" style="width:180px;">按中转价</div>
+      </div>
+    </div>
+    <div class="pric-legend">
+      <div class="pric-legend-item"><div class="pric-legend-dot official"></div>官方价格（含隐性成本）</div>
+      <div class="pric-legend-item"><div class="pric-legend-dot modelset"></div>ModelSet 中转价</div>
+    </div>
+  </div>
+  <div class="pric-note">
+    <strong>按量付费</strong>，余额永久有效<br>
+    无月费 · 无套餐 · 无分级<br><br>
+    加上绑卡和网络成本，<br>
+    中转站实际比官方省 <strong>30-60%</strong>。
+  </div>
+</div>
+
+</body>
+</html>
